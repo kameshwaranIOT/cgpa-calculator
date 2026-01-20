@@ -279,9 +279,151 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
         }
+
+        /* Mobile Mode Styles */
+        .mobile-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 24px;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.1);
+        }
+
+        .mobile-toggle:active {
+            transform: scale(0.95);
+        }
+
+        body.mobile-mode {
+            padding: 60px 10px 20px 10px;
+        }
+
+        body.mobile-mode .container {
+            padding: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        body.mobile-mode h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        body.mobile-mode .subtitle {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        body.mobile-mode .grading-scale {
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+
+        body.mobile-mode .grading-scale p {
+            margin: 3px 0;
+        }
+
+        body.mobile-mode .subject-item {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        body.mobile-mode .subject-item .form-group {
+            width: 100%;
+        }
+
+        body.mobile-mode .delete-btn {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        body.mobile-mode input, 
+        body.mobile-mode select {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        body.mobile-mode label {
+            font-size: 13px;
+        }
+
+        body.mobile-mode .button-group {
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        body.mobile-mode .add-btn,
+        body.mobile-mode .calculate-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        body.mobile-mode .result-value {
+            font-size: 36px;
+        }
+
+        body.mobile-mode .result {
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        body.mobile-mode .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            font-size: 11px;
+        }
+
+        @media (max-width: 480px) {
+            .mobile-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            body {
+                padding: 55px 10px 20px 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .subject-item {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMode()" title="Toggle Mobile Mode">
+        📱
+    </div>
     <div class="container">
         <h1>📚 CGPA Calculator</h1>
         <p class="subtitle">Calculate your Cumulative Grade Point Average</p>
@@ -319,6 +461,22 @@
 
     <script>
         let subjectCount = 0;
+
+        // Mobile Mode Toggle
+        function toggleMobileMode() {
+            const body = document.body;
+            const toggle = document.getElementById('mobileToggle');
+            
+            if (body.classList.contains('mobile-mode')) {
+                body.classList.remove('mobile-mode');
+                toggle.textContent = '📱';
+                localStorage.setItem('mobileMode', 'false');
+            } else {
+                body.classList.add('mobile-mode');
+                toggle.textContent = '🖥️';
+                localStorage.setItem('mobileMode', 'true');
+            }
+        }
 
         function addSubject() {
             subjectCount++;
@@ -462,6 +620,13 @@
 
         // Add initial subject for user convenience
         window.onload = function() {
+            // Restore mobile mode preference
+            const isMobileMode = localStorage.getItem('mobileMode') === 'true';
+            if (isMobileMode) {
+                document.body.classList.add('mobile-mode');
+                document.getElementById('mobileToggle').textContent = '🖥️';
+            }
+            
             addSubject();
         };
     </script>
