@@ -1,4 +1,5 @@
 {
-  "name": "cgpa-calculator",
-  "version": 2
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "installCommand": ""
 }
