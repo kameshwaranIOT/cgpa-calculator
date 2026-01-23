@@ -279,9 +279,208 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
         }
+
+        .mobile-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            z-index: 100;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        body.mobile-mode {
+            padding: 80px 10px 20px 10px;
+        }
+
+        body.mobile-mode .container {
+            padding: 25px 15px;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        body.mobile-mode h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        body.mobile-mode .subtitle {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        body.mobile-mode .grading-scale {
+            padding: 12px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        body.mobile-mode .grading-scale p {
+            margin: 3px 0;
+        }
+
+        body.mobile-mode .subject-item {
+            grid-template-columns: 1fr;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        body.mobile-mode .form-group {
+            width: 100%;
+        }
+
+        body.mobile-mode label {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        body.mobile-mode input, body.mobile-mode select {
+            padding: 6px 8px;
+            font-size: 12px;
+        }
+
+        body.mobile-mode .delete-btn {
+            width: 100%;
+            height: 36px;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        body.mobile-mode .button-group {
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        body.mobile-mode .add-btn, body.mobile-mode .calculate-btn {
+            padding: 10px 15px;
+            font-size: 13px;
+        }
+
+        body.mobile-mode .result-value {
+            font-size: 36px;
+        }
+
+        body.mobile-mode .result-label {
+            font-size: 12px;
+        }
+
+        body.mobile-mode .result-status {
+            font-size: 12px;
+        }
+
+        body.mobile-mode .subject-count {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        body.mobile-mode .footer {
+            font-size: 11px;
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 60px 10px 20px 10px;
+            }
+
+            .container {
+                padding: 25px 15px;
+                border-radius: 10px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .grading-scale {
+                padding: 12px;
+                font-size: 11px;
+                margin-bottom: 15px;
+            }
+
+            .grading-scale p {
+                margin: 3px 0;
+            }
+
+            .subject-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                margin-bottom: 12px;
+            }
+
+            label {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+
+            input, select {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .delete-btn {
+                width: 100%;
+                height: 36px;
+                font-size: 11px;
+                margin-top: 5px;
+            }
+
+            .button-group {
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .add-btn, .calculate-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+
+            .result-value {
+                font-size: 36px;
+            }
+
+            .result-label {
+                font-size: 12px;
+            }
+
+            .result-status {
+                font-size: 12px;
+            }
+
+            .subject-count {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .footer {
+                font-size: 11px;
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="mobile-toggle" onclick="toggleMobileMode()" id="mobileToggle">📱 Desktop Mode</button>
     <div class="container">
         <h1>📚 CGPA Calculator</h1>
         <p class="subtitle">Calculate your Cumulative Grade Point Average</p>
@@ -319,6 +518,25 @@
 
     <script>
         let subjectCount = 0;
+
+        // Mobile mode functionality
+        function toggleMobileMode() {
+            const body = document.body;
+            const toggle = document.getElementById('mobileToggle');
+            const isMobileMode = localStorage.getItem('mobileMode') === 'true';
+            
+            if (isMobileMode) {
+                // Switch to desktop mode
+                body.classList.remove('mobile-mode');
+                localStorage.setItem('mobileMode', 'false');
+                toggle.textContent = '📱 Desktop Mode';
+            } else {
+                // Switch to mobile mode
+                body.classList.add('mobile-mode');
+                localStorage.setItem('mobileMode', 'true');
+                toggle.textContent = '🖥️ Mobile Mode';
+            }
+        }
 
         function addSubject() {
             subjectCount++;
@@ -462,6 +680,15 @@
 
         // Add initial subject for user convenience
         window.onload = function() {
+            // Check if dark mode preference is saved
+            const isMobileMode = localStorage.getItem('mobileMode') === 'true';
+            const toggle = document.getElementById('mobileToggle');
+            
+            if (isMobileMode) {
+                document.body.classList.add('mobile-mode');
+                toggle.textContent = '🖥️ Mobile Mode';
+            }
+            
             addSubject();
         };
     </script>
