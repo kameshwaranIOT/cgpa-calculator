@@ -16,6 +16,3 @@ This project is deployed on Vercel. Visit the live site here: [https://cgpa-calc
 
 Simply open `index.html` in your browser to use the application locally.
 
-## License
-
-MIT
