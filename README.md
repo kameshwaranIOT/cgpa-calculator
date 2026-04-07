@@ -1,18 +1,57 @@
-# CGPA Calculator
+🎓 CGPA Calculator
 
-A web application for calculating and managing your CGPA (Cumulative Grade Point Average).
+A simple and elegant web-based CGPA (Cumulative Grade Point Average) calculator that helps students easily compute their academic performance based on grades and credits.
 
-## Features
+📌 Features
+Add multiple subjects dynamically
+Input grades and corresponding credits
+Automatic CGPA calculation
+Clean and modern UI design
+User-friendly interface
 
-- Calculate CGPA from grades
-- Track course details
-- Responsive design with modern UI
 
-## Deployment
 
-This project is deployed on Vercel. Visit the live site here: [https://cgpa-calculator.vercel.app](https://cgpa-calculator.vercel.app)
 
-## Local Development
+⚙️ How It Works
+Enter the subject name
+Select the grade
+Enter the credits
+Click "Add Subject" to include more subjects
+Click "Calculate CGPA" to get the result
+🧮 CGPA Formula
 
-Simply open `index.html` in your browser to use the application locally.
+The CGPA is calculated using:
+
+CGPA = (Σ (Grade Point × Credit)) / (Σ Credits)
+🛠️ Technologies Used
+HTML
+CSS
+JavaScript
+📁 Project Structure
+📦 cgpa-calculator
+ ┣ 📜 index.html
+ ┣ 📜 style.css
+ ┣ 📜 script.js
+ ┗ 📜 README.md
+🚀 Getting Started
+1. Clone the Repository
+git clone https://github.com/your-username/cgpa-calculator.git
+2. Open the Project
+
+Just open index.html in your browser.
+
+✨ Future Improvements
+Add GPA to percentage converter
+Save results locally
+Add dark/light mode toggle
+Mobile optimization improvements
+🙌 Author
+
+kameshwaran K
+
+Developed as a student utility project
+
+📜 License
+
+This project is open-source and available under the MIT License.
 
